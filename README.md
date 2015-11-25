@@ -1,5 +1,5 @@
-# react-dropdown-menu
-[React](http://facebook.github.io/react/) dropdown menu. Exports a commonjs module that can be used with [webpack](http://webpack.github.io/). Source is in ES6 and is compiled down to ES5 using [Babel](https://babeljs.io/).
+# react-textinput
+[React](http://facebook.github.io/react/) text input. Exports a commonjs module that can be used with [webpack](http://webpack.github.io/). Source is in ES6 and is compiled down to ES5 using [Babel](https://babeljs.io/).
 
 ## Usage
 
@@ -7,26 +7,15 @@
 The component is written using ES6/JSX therefore Babel is recommended to use it. The below example is based on using [webpack](http://webpack.github.io/) and [babel-loader](https://github.com/babel/babel-loader).
 ```js
 import React from 'react';
-import DropdownMenu from 'react-dropdown-menu';
+import DropdownMenu from 'react-textinput';
 
 export default class BasicExample extends React.Component
 
   render() {
     return (
-      <DropdownMenu
-        menuIconClass='ion-navicon'
-        items={[
-            {
-                name: 'Add',
-                iconClass: 'icon-plus',
-                action: function() {}
-            },
-            {
-                name: 'Remove',
-                iconClass: 'icon-minus',
-                action: function() {}
-            }]
-      }/>
+      <TextInput
+        label='Username...'
+        onChange={this.handleChange} />
     );
   }
 }
@@ -82,7 +71,10 @@ Below are is a sample of how to setup the loaders:
     require('postcss-simple-vars') {
       variables: {
         'base-grid-size' : '4px',
-        'primary-color': '#38b889',
+        'primary-color' : '#5e8aaa',
+        'accent-color' : '#38b889',
+        'warning-color' : '#d43c36',
+        'success-color' : '#50a111',
         'primary-font-color': '#333',
         'inverse-font-color': '#fff',
         'primary-background-color' : '#fff'
