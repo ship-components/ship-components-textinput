@@ -40,6 +40,9 @@ export default class TextInput extends React.Component {
   }
 
   handleFocus(event) {
+    if (!this.props.editable) {
+      return;
+    }
     this.setState({
       focus: true
     });
@@ -155,6 +158,7 @@ export default class TextInput extends React.Component {
           {...props}
           className={'text-input--field ' + css.field}
           ref='input'
+          disabled={!this.props.editable}
           style={styles}
           value={this.props.value}
           onFocus={this.handleFocus}
