@@ -174,3 +174,13 @@ export default class TextInput extends React.Component {
     );
   }
 }
+
+/**
+ * Defaults
+ * @type {Object}
+ */
+TextInput.defaultProps = {
+  editable: true,
+  value: '',
+  label: null
+};
