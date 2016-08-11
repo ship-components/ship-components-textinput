@@ -54,8 +54,16 @@
   padding: 4px 0 8px 0;
   resize: none;
   overflow: auto;
+  cursor: default;
 }
 
+.text-input--field:disabled {
+  color: inherit;
+}
+
+.text-input--focus .text-input--field {
+  cursor: text;
+}
 
 .text-input--label {
   position: absolute;
@@ -69,9 +77,12 @@
 
 .text-input--active .text-input--label {
   -webkit-transform: translateY(-20px);
-      -ms-transform: translateY(-20px);
           transform: translateY(-20px);
   font-size: 12px;
+}
+
+.text-input--hasLabel {
+  margin-top: 24px;
 }
 
 /*# sourceMappingURL=TextInput.css.map*/

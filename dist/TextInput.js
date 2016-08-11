@@ -56,13 +56,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 	
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(3);
 	
@@ -84,7 +84,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var TextInput = (function (_React$Component) {
+	var TextInput = function (_React$Component) {
 	  _inherits(TextInput, _React$Component);
 	
 	  function TextInput(props) {
@@ -129,6 +129,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'handleFocus',
 	    value: function handleFocus(event) {
+	      if (!this.props.editable) {
+	        return;
+	      }
 	      this.setState({
 	        focus: true
 	      });
@@ -198,6 +201,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        classes.push(_textInput2.default.focus);
 	      }
 	
+	      if (this.props.label) {
+	        classes.push(_textInput2.default.hasLabel);
+	      }
+	
 	      if (valueIsNotEmpty && typeof this.props.validate === 'function') {
 	        if (this.validate(this.props.value)) {
 	          classes.push(_textInput2.default.success);
@@ -254,6 +261,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _react2.default.createElement('textarea', _extends({}, props, {
 	          className: 'text-input--field ' + _textInput2.default.field,
 	          ref: 'input',
+	          disabled: !this.props.editable,
 	          style: styles,
 	          value: this.props.value,
 	          onFocus: this.handleFocus,
@@ -270,21 +278,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }]);
 	
 	  return TextInput;
-	})(_react2.default.Component);
+	}(_react2.default.Component);
+	
+	/**
+	 * Defaults
+	 * @type {Object}
+	 */
+	
 	
 	exports.default = TextInput;
+	TextInput.defaultProps = {
+	  editable: true,
+	  value: '',
+	  label: null
+	};
 
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
 
-	'use strict'
+	'use strict';
 	
 	/**
 	 * Stypes to hide the text input
 	 * @type {String}
 	 */
-	;
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
@@ -296,7 +315,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * Reference to text area we use to calculate the styles
 	 */
-	var hiddenTextarea = undefined;
+	var hiddenTextarea = void 0;
 	
 	function calculateNodeStyling(node) {
 	  if (!node) {
@@ -397,7 +416,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"container":"text-input--container","error":"text-input--error","success":"text-input--success","focus":"text-input--focus","field":"text-input--field","label":"text-input--label","active":"text-input--active"};
+	module.exports = {"container":"text-input--container","error":"text-input--error","success":"text-input--success","focus":"text-input--focus","field":"text-input--field","label":"text-input--label","active":"text-input--active","hasLabel":"text-input--hasLabel"};
 
 /***/ },
 /* 3 */
