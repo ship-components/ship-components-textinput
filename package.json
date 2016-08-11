@@ -1,5 +1,5 @@
 {
-  "name": "react-textinput",
+  "name": "ship-components-textinput",
   "version": "0.1.1",
   "description": "Material Design Autosizing Text Input",
   "main": "src/TextInput.jsx",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ship-components/react-textinput.git"
+    "url": "git+https://github.com/ship-components/ship-components-textinput.git"
   },
   "keywords": [
     "react"
@@ -18,9 +18,9 @@
   "author": "Isaac Suttell <isaac@isaacsuttell.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ship-components/react-textinput/issues"
+    "url": "https://github.com/ship-components/ship-components-textinput/issues"
   },
-  "homepage": "https://github.com/ship-components/react-textinput#readme",
+  "homepage": "https://github.com/ship-components/ship-components-textinput#readme",
   "devDependencies": {
     "autoprefixer": "^6.1.0",
     "babel": "^6.0.15",
@@ -83,7 +83,7 @@
   "babelJest": {
     "include": [
       "src/**/*.@(js|jsx|es6)",
-      "node_modules/react-highlight-click/src/**/*.@(js|jsx|es6)"
+      "node_modules/ship-components-highlight-click/src/**/*.@(js|jsx|es6)"
     ]
   }
 }
