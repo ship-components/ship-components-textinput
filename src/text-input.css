@@ -75,3 +75,7 @@
   transform: translateY(calc($base-grid-size * -5));
   font-size: 12px;
 }
+
+.hasLabel {
+  margin-top: 24px;
+}

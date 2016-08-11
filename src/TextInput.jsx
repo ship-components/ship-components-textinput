@@ -107,6 +107,10 @@ export default class TextInput extends React.Component {
      classes.push(css.focus);
     }
 
+    if (this.props.label) {
+      classes.push(css.hasLabel);
+    }
+
     if (valueIsNotEmpty && typeof this.props.validate === 'function') {
       if (this.validate(this.props.value)) {
         classes.push(css.success);
