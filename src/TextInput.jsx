@@ -46,7 +46,7 @@ export default class TextInput extends React.Component {
     this.setState({
       focus: true
     });
-    if (this.props.onFocus) {
+    if (typeof this.props.onFocus === 'function') {
       this.props.onFocus(event);
     }
   }
@@ -55,7 +55,7 @@ export default class TextInput extends React.Component {
     this.setState({
       focus: false
     });
-    if (this.props.onBlur) {
+    if (typeof this.props.onBlur === 'function') {
       this.props.onBlur(event);
     }
   }
@@ -63,7 +63,7 @@ export default class TextInput extends React.Component {
   handleChange(event) {
     this.calculateHeight();
 
-    if (this.props.onChange) {
+    if (typeof this.props.onChange === 'function') {
       this.props.onChange(event);
     }
   }
@@ -75,7 +75,7 @@ export default class TextInput extends React.Component {
         this.props.onEnterKeyDown(event);
       }
     }
-    if (this.props.onKeyDown) {
+    if (typeof this.props.onKeyDown === 'function') {
       this.props.onKeyDown(event);
     }
   }
