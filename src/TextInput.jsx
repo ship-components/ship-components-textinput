@@ -159,16 +159,18 @@ export default class TextInput extends React.Component {
     return (
       <div className={this.classNames()}>
         <textarea
-          {...props}
+          placeholder={this.props.placeholder}
           className={'text-input--field ' + css.field}
           ref='input'
-          disabled={!this.props.editable}
+          disabled={this.props.disabled || !this.props.editable}
           style={styles}
           value={this.props.value}
+          onClick={this.props.onClick}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown} />
+          onKeyDown={this.handleKeyDown}
+        />
         {this.props.label ?
           <label className={'text-input--label ' + css.label}>
             {this.props.label}

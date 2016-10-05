@@ -89,12 +89,13 @@ Below are is a sample of how to setup the loaders:
 }
 ```
 
-## Todo
-* Add an option to create menu using children
-
 ## Tests
 1. `npm install`
 2. `npm test`
+
+## History
+* 0.1.2 - Bug fixes and fixed unknown prop warning
+* 0.1.1 - Initial
 
 ## License
 The MIT License (MIT)

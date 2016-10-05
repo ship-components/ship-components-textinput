@@ -1,6 +1,6 @@
 {
   "name": "ship-components-textinput",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Material Design Autosizing Text Input",
   "main": "src/TextInput.jsx",
   "scripts": {
@@ -82,8 +82,7 @@
   },
   "babelJest": {
     "include": [
-      "src/**/*.@(js|jsx|es6)",
-      "node_modules/ship-components-highlight-click/src/**/*.@(js|jsx|es6)"
+      "src/**/*.@(js|jsx|es6)"
     ]
   }
 }
