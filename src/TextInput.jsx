@@ -71,6 +71,9 @@ export default class TextInput extends React.Component {
   handleKeyDown(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
       event.preventDefault();
+      if (typeof this.props.onEnterKeyDown === 'function') {
+        this.props.onEnterKeyDown(event);
+      }
     }
     if (this.props.onKeyDown) {
       this.props.onKeyDown(event);
@@ -160,6 +163,10 @@ export default class TextInput extends React.Component {
       <div className={this.classNames()}>
         <textarea
           placeholder={this.props.placeholder}
+          tabIndex={this.props.tabIndex}
+          onDragStart={this.props.onDragStart}
+          onDragEnd={this.props.onDragEnd}
+          onDragOver={this.props.onDragOver}
           className={'text-input--field ' + css.field}
           ref='input'
           disabled={this.props.disabled || !this.props.editable}
