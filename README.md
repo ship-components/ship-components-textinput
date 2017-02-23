@@ -94,6 +94,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.2.0 - Added error prop for error message
 * 0.1.4 - Replaced default cursor with text cursor on input
 * 0.1.3 - Added more missing props
 * 0.1.2 - Bug fixes and fixed unknown prop warning

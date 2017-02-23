@@ -160,27 +160,34 @@ export default class TextInput extends React.Component {
     }
 
     return (
-      <div className={this.classNames()}>
-        <textarea
-          placeholder={this.props.placeholder}
-          tabIndex={this.props.tabIndex}
-          onDragStart={this.props.onDragStart}
-          onDragEnd={this.props.onDragEnd}
-          onDragOver={this.props.onDragOver}
-          className={'text-input--field ' + css.field}
-          ref='input'
-          disabled={this.props.disabled || !this.props.editable}
-          style={styles}
-          value={this.props.value}
-          onClick={this.props.onClick}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-        />
-        {this.props.label ?
-          <label className={'text-input--label ' + css.label}>
-            {this.props.label}
+      <div>
+        <div className={this.classNames()}>
+          <textarea
+            placeholder={this.props.placeholder}
+            tabIndex={this.props.tabIndex}
+            onDragStart={this.props.onDragStart}
+            onDragEnd={this.props.onDragEnd}
+            onDragOver={this.props.onDragOver}
+            className={'text-input--field ' + css.field}
+            ref='input'
+            disabled={this.props.disabled || !this.props.editable}
+            style={styles}
+            value={this.props.value}
+            onClick={this.props.onClick}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+          />
+          {this.props.label ?
+            <label className={'text-input--label ' + css.label}>
+              {this.props.label}
+            </label>
+          : null}
+        </div>
+        {this.props.error ?
+          <label className={'text-input--error ' + css.error}>
+            {this.props.error}
           </label>
         : null}
       </div>

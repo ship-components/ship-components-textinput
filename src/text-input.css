@@ -76,6 +76,10 @@
   font-size: 12px;
 }
 
+.error {
+  font-size: 12px;
+}
+
 .hasLabel {
   margin-top: 24px;
 }
