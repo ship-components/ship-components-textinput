@@ -70,7 +70,10 @@ export default class TextInput extends React.Component {
 
   handleKeyDown(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
-      event.preventDefault();
+      if (!(this.props.multiline && event.shiftKey)) {
+        // prevent new line if not Shift + Enter
+        event.preventDefault();
+      }
       if (typeof this.props.onEnterKeyDown === 'function') {
         this.props.onEnterKeyDown(event);
       }
