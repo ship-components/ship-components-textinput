@@ -21,6 +21,7 @@ export default class TextInput extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleEnterKey = this.handleEnterKey.bind(this);
   }
 
   componentDidMount() {
@@ -70,16 +71,20 @@ export default class TextInput extends React.Component {
 
   handleKeyDown(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
-      if (!(this.props.multiline && event.shiftKey)) {
-        // prevent new line if not Shift + Enter
-        event.preventDefault();
-      }
-      if (typeof this.props.onEnterKeyDown === 'function') {
-        this.props.onEnterKeyDown(event);
-      }
+      this.handleEnterKey(event);
     }
     if (typeof this.props.onKeyDown === 'function') {
       this.props.onKeyDown(event);
+    }
+  }
+
+  handleEnterKey(event) {
+    if (!(this.props.multiline && event.shiftKey)) {
+      // prevent new line if not Shift + Enter
+      event.preventDefault();
+    }
+    if (typeof this.props.onEnterKeyDown === 'function') {
+      this.props.onEnterKeyDown(event);
     }
   }
 
