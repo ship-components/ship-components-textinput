@@ -21,6 +21,7 @@ export default class TextInput extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleEnterKey = this.handleEnterKey.bind(this);
   }
 
   componentDidMount() {
@@ -70,13 +71,20 @@ export default class TextInput extends React.Component {
 
   handleKeyDown(event) {
     if (event.key === 'Enter' || event.keyCode === 13) {
-      event.preventDefault();
-      if (typeof this.props.onEnterKeyDown === 'function') {
-        this.props.onEnterKeyDown(event);
-      }
+      this.handleEnterKey(event);
     }
     if (typeof this.props.onKeyDown === 'function') {
       this.props.onKeyDown(event);
+    }
+  }
+
+  handleEnterKey(event) {
+    if (!(this.props.multiline && event.shiftKey)) {
+      // prevent new line if not Shift + Enter
+      event.preventDefault();
+    }
+    if (typeof this.props.onEnterKeyDown === 'function') {
+      this.props.onEnterKeyDown(event);
     }
   }
 
@@ -161,26 +169,33 @@ export default class TextInput extends React.Component {
 
     return (
       <div className={this.classNames()}>
-        <textarea
-          placeholder={this.props.placeholder}
-          tabIndex={this.props.tabIndex}
-          onDragStart={this.props.onDragStart}
-          onDragEnd={this.props.onDragEnd}
-          onDragOver={this.props.onDragOver}
-          className={'text-input--field ' + css.field}
-          ref='input'
-          disabled={this.props.disabled || !this.props.editable}
-          style={styles}
-          value={this.props.value}
-          onClick={this.props.onClick}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-        />
-        {this.props.label ?
-          <label className={'text-input--label ' + css.label}>
-            {this.props.label}
+        <div className={css.fieldContainer}>
+          <textarea
+            placeholder={this.props.placeholder}
+            tabIndex={this.props.tabIndex}
+            onDragStart={this.props.onDragStart}
+            onDragEnd={this.props.onDragEnd}
+            onDragOver={this.props.onDragOver}
+            className={css.field}
+            ref='input'
+            disabled={this.props.disabled || !this.props.editable}
+            style={styles}
+            value={this.props.value}
+            onClick={this.props.onClick}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onKeyDown={this.handleKeyDown}
+          />
+          {this.props.label ?
+            <label className={css.label}>
+              {this.props.label}
+            </label>
+          : null}
+        </div>
+        {this.props.error ?
+          <label className={css.error}>
+            {this.props.error}
           </label>
         : null}
       </div>
