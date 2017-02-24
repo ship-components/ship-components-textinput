@@ -176,7 +176,7 @@ export default class TextInput extends React.Component {
             onDragStart={this.props.onDragStart}
             onDragEnd={this.props.onDragEnd}
             onDragOver={this.props.onDragOver}
-            className={css.field}
+            className={"text-input--field " + css.field}
             ref='input'
             disabled={this.props.disabled || !this.props.editable}
             style={styles}
@@ -188,13 +188,13 @@ export default class TextInput extends React.Component {
             onKeyDown={this.handleKeyDown}
           />
           {this.props.label ?
-            <label className={css.label}>
+            <label className={"text-input--label " + css.label}>
               {this.props.label}
             </label>
           : null}
         </div>
         {this.props.error ?
-          <label className={css.error}>
+          <label className={"text-input--error " + css.error}>
             {this.props.error}
           </label>
         : null}
