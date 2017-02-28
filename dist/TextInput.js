@@ -88,7 +88,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function TextInput(props) {
 	    _classCallCheck(this, TextInput);
 	
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TextInput).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (TextInput.__proto__ || Object.getPrototypeOf(TextInput)).call(this, props));
 	
 	    _this.state = {
 	      focus: false,
@@ -102,6 +102,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.handleBlur = _this.handleBlur.bind(_this);
 	    _this.handleChange = _this.handleChange.bind(_this);
 	    _this.handleKeyDown = _this.handleKeyDown.bind(_this);
+	    _this.handleEnterKey = _this.handleEnterKey.bind(_this);
 	    return _this;
 	  }
 	
@@ -133,7 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({
 	        focus: true
 	      });
-	      if (this.props.onFocus) {
+	      if (typeof this.props.onFocus === 'function') {
 	        this.props.onFocus(event);
 	      }
 	    }
@@ -143,7 +144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      this.setState({
 	        focus: false
 	      });
-	      if (this.props.onBlur) {
+	      if (typeof this.props.onBlur === 'function') {
 	        this.props.onBlur(event);
 	      }
 	    }
@@ -152,7 +153,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    value: function handleChange(event) {
 	      this.calculateHeight();
 	
-	      if (this.props.onChange) {
+	      if (typeof this.props.onChange === 'function') {
 	        this.props.onChange(event);
 	      }
 	    }
@@ -160,10 +161,21 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'handleKeyDown',
 	    value: function handleKeyDown(event) {
 	      if (event.key === 'Enter' || event.keyCode === 13) {
+	        this.handleEnterKey(event);
+	      }
+	      if (typeof this.props.onKeyDown === 'function') {
+	        this.props.onKeyDown(event);
+	      }
+	    }
+	  }, {
+	    key: 'handleEnterKey',
+	    value: function handleEnterKey(event) {
+	      if (!(this.props.multiline && event.shiftKey)) {
+	        // prevent new line if not Shift + Enter
 	        event.preventDefault();
 	      }
-	      if (this.props.onKeyDown) {
-	        this.props.onKeyDown(event);
+	      if (typeof this.props.onEnterKeyDown === 'function') {
+	        this.props.onEnterKeyDown(event);
 	      }
 	    }
 	
@@ -256,23 +268,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _react2.default.createElement(
 	        'div',
 	        { className: this.classNames() },
-	        _react2.default.createElement('textarea', {
-	          placeholder: this.props.placeholder,
-	          className: 'text-input--field ' + _textInput2.default.field,
-	          ref: 'input',
-	          disabled: this.props.disabled || !this.props.editable,
-	          style: styles,
-	          value: this.props.value,
-	          onClick: this.props.onClick,
-	          onFocus: this.handleFocus,
-	          onBlur: this.handleBlur,
-	          onChange: this.handleChange,
-	          onKeyDown: this.handleKeyDown
-	        }),
-	        this.props.label ? _react2.default.createElement(
+	        _react2.default.createElement(
+	          'div',
+	          { className: _textInput2.default.fieldContainer },
+	          _react2.default.createElement('textarea', {
+	            placeholder: this.props.placeholder,
+	            tabIndex: this.props.tabIndex,
+	            onDragStart: this.props.onDragStart,
+	            onDragEnd: this.props.onDragEnd,
+	            onDragOver: this.props.onDragOver,
+	            className: 'text-input--field ' + _textInput2.default.field,
+	            ref: 'input',
+	            disabled: this.props.disabled || !this.props.editable,
+	            style: styles,
+	            value: this.props.value,
+	            onClick: this.props.onClick,
+	            onFocus: this.handleFocus,
+	            onBlur: this.handleBlur,
+	            onChange: this.handleChange,
+	            onKeyDown: this.handleKeyDown
+	          }),
+	          this.props.label ? _react2.default.createElement(
+	            'label',
+	            { className: 'text-input--label ' + _textInput2.default.label },
+	            this.props.label
+	          ) : null
+	        ),
+	        this.props.error ? _react2.default.createElement(
 	          'label',
-	          { className: 'text-input--label ' + _textInput2.default.label },
-	          this.props.label
+	          { className: 'text-input--error ' + _textInput2.default.error },
+	          this.props.error
 	        ) : null
 	      );
 	    }
@@ -345,8 +370,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	function nodeHeight(uiTextNode) {
-	  var minRows = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
-	  var maxRows = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	  var minRows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+	  var maxRows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 	
 	  if (!hiddenTextarea) {
 	    hiddenTextarea = document.createElement('textarea');
@@ -356,16 +381,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Copy all CSS properties that have an impact on the height of the content in
 	  // the textbox
 	
-	  var _calculateNodeStyling = calculateNodeStyling(uiTextNode);
-	
-	  var paddingSize = _calculateNodeStyling.paddingSize;
-	  var borderSize = _calculateNodeStyling.borderSize;
-	  var boxSizing = _calculateNodeStyling.boxSizing;
-	  var sizingStyle = _calculateNodeStyling.sizingStyle;
+	  var _calculateNodeStyling = calculateNodeStyling(uiTextNode),
+	      paddingSize = _calculateNodeStyling.paddingSize,
+	      borderSize = _calculateNodeStyling.borderSize,
+	      boxSizing = _calculateNodeStyling.boxSizing,
+	      sizingStyle = _calculateNodeStyling.sizingStyle;
 	
 	  // Need to have the overflow attribute to hide the scrollbar otherwise
 	  // text-lines will not calculated properly as the shadow will technically be
 	  // narrower for content
+	
 	
 	  hiddenTextarea.setAttribute('style', sizingStyle + ';' + HIDDEN_TEXTAREA_STYLE);
 	  hiddenTextarea.value = uiTextNode.value ? uiTextNode.value : '';
@@ -417,7 +442,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"container":"text-input--container","error":"text-input--error","success":"text-input--success","focus":"text-input--focus","field":"text-input--field","label":"text-input--label","active":"text-input--active","hasLabel":"text-input--hasLabel"};
+	module.exports = {"container":"text-input--container","focus":"text-input--focus","fieldContainer":"text-input--fieldContainer","error":"text-input--error","success":"text-input--success","field":"text-input--field","label":"text-input--label","active":"text-input--active","hasLabel":"text-input--hasLabel"};
 
 /***/ },
 /* 3 */
