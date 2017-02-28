@@ -94,6 +94,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.2.2 - Added transition update timeout so textinput waits on css transition before height calc
 * 0.2.1 - Hardcode classname readded
 * 0.2.0 - Added error prop for error message. Added multiline prop to allow Shift+Enter for newlines.
 * 0.1.4 - Replaced default cursor with text cursor on input
