@@ -7,26 +7,28 @@ import ReactDOM from 'react-dom';
 import TextInput from '../src/TextInput';
 
 class Examples extends React.Component {
-constructor(props) {
+  constructor(props) {
     super(props);
-
     this.state = {
-      firstTextInput: '',
-      secondTextInput: ''
+      long: "Initial text."
     }
 
     this.handleChange = this.handleChange.bind(this);
+
+    let mockEvent = {
+      target: {
+        value: require('./howl.js').howl
+      }
+    }
+    this.longInputId = setTimeout(this.handleChange.bind(this,"long", mockEvent), 500)
   }
 
-  handleChange(prop, event) {
-    event.preventDefault();
-
+  handleChange(field, ev) {
     this.setState({
-      [prop]: event.target.value
+      [field]: ev.target.value
     });
   }
-
-
+        
   render() {
     return (
       <div>
@@ -38,9 +40,9 @@ constructor(props) {
             onChange={this.handleChange.bind(this, 'firstTextInput')}
           />
           <code>
-{
-`<TextInput onChange={this.handleChange} />`
-}
+          {
+          `<TextInput onChange={this.handleChange} />`
+          }
           </code>
         </div>
 
@@ -52,9 +54,23 @@ constructor(props) {
             onChange={this.handleChange.bind(this, 'secondTextInput')}
           />
           <code>
-{
-`<TextInput label='Username...' onChange={this.handleChange} />`
-}
+          {
+          `<TextInput label='Username...' onChange={this.handleChange} />`
+          }
+          </code>
+        </div>
+
+        <div className='example-group'>
+          <h2>Labels</h2>
+          <TextInput
+            label='Delayed long input...'
+            value={this.state.long}
+            onChange={this.handleChange.bind(null, 'long')}
+          />
+          <code>
+          {
+          `<TextInput label='Username...' onChange={this.handleChange} />`
+          }
           </code>
         </div>
       </div>

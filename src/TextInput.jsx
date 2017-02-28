@@ -33,10 +33,14 @@ export default class TextInput extends React.Component {
     // Render the content and then update the state/height
     clearTimeout(this.updateId);
     this.updateId = setTimeout(this.calculateHeight, 0);
+
+    clearTimeout(this.transitionUpdateId)
+    this.transitionUpdateId = setTimeout(this.calculateHeight, 250);
   }
 
   componentWillUnmount() {
     clearTimeout(this.updateId);
+    clearTimeout(this.transitionUpdateId)
     window.removeEventListener('resize', this.calculateHeight);
   }
 
