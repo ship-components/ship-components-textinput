@@ -2,11 +2,29 @@
   position: relative;
   margin: 4px 0;
   width: 100%;
-  line-height: 1;
 }
 
-.text-input--container:after,
-  .text-input--container:before {
+.text-input--container.text-input--focus .text-input--fieldContainer:after {
+  width: 100%;
+}
+
+.text-input--container.text-input--error .text-input--fieldContainer:after,
+  .text-input--container.text-input--error .text-input--fieldContainer:before {
+  background-color: rgba(212, 60, 54, 0.3);
+}
+
+.text-input--container.text-input--success .text-input--fieldContainer:after,
+  .text-input--container.text-input--success .text-input--fieldContainer:before {
+  background-color: rgba(80, 161, 17, 0.3);
+}
+
+.text-input--fieldContainer {
+  line-height: 1;
+  position: relative;
+}
+
+.text-input--fieldContainer:after,
+  .text-input--fieldContainer:before {
   content: '';
   position: absolute;
   bottom: 0;
@@ -16,29 +34,15 @@
   transition: all 500ms ease;
 }
 
-.text-input--container.text-input--error:after,
-  .text-input--container.text-input--error:before {
-  background-color: rgba(212, 60, 54, 0.3);
-}
-
-.text-input--container.text-input--success:after,
-  .text-input--container.text-input--success:before {
-  background-color: rgba(80, 161, 17, 0.3);
-}
-
-.text-input--container:after {
+.text-input--fieldContainer:after {
   bottom: -3px;
   width: 0;
   height: 3px;
 }
 
-.text-input--container:before {
+.text-input--fieldContainer:before {
   width: 100%;
   height: 1px;
-}
-
-.text-input--container.text-input--focus:after {
-  width: 100%;
 }
 
 .text-input--field  {
@@ -54,7 +58,7 @@
   padding: 4px 0 8px 0;
   resize: none;
   overflow: auto;
-  cursor: default;
+  cursor: text;
 }
 
 .text-input--field:disabled {
@@ -78,6 +82,10 @@
 .text-input--active .text-input--label {
   -webkit-transform: translateY(-20px);
           transform: translateY(-20px);
+  font-size: 12px;
+}
+
+.text-input--error {
   font-size: 12px;
 }
 

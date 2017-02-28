@@ -1,6 +1,14 @@
 # react-textinput
 [React](http://facebook.github.io/react/) text input. Exports a commonjs module that can be used with [webpack](http://webpack.github.io/). Source is in ES6 and is compiled down to ES5 using [Babel](https://babeljs.io/).
 
+If you are looking for a rich HTML text editor, please refer to the [ship-components-texteditor](https://github.com/ship-components/ship-components-texteditor).
+
+
+[![npm](https://img.shields.io/npm/v/ship-components-textinput.svg?maxAge=2592000)](https://www.npmjs.com/package/ship-components-textinput)
+[![Build Status](http://img.shields.io/travis/ship-components/ship-components-textinput/master.svg?style=flat)](https://travis-ci.org/ship-components/ship-components-textinput)
+[![Coverage](http://img.shields.io/coveralls/ship-components/ship-components-textinput.svg?style=flat)](https://coveralls.io/github/ship-components/ship-components-textinput)
+[![devDependencies](https://img.shields.io/david/dev/ship-components/ship-components-textinput.svg?style=flat)](https://david-dm.org/ship-components/ship-components-textinput?type=dev)
+
 ## Usage
 
 ### ES6/JSX (Recommended)
@@ -94,6 +102,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.3.0 - Upgrades to React 15, adds tests, Travis CI and coverage
 * 0.2.1 - Hardcode classname readded
 * 0.2.0 - Added error prop for error message. Added multiline prop to allow Shift+Enter for newlines.
 * 0.1.4 - Replaced default cursor with text cursor on input
