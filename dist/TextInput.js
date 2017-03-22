@@ -118,11 +118,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // Render the content and then update the state/height
 	      clearTimeout(this.updateId);
 	      this.updateId = setTimeout(this.calculateHeight, 0);
+	
+	      clearTimeout(this.transitionUpdateId);
+	      this.transitionUpdateId = setTimeout(this.calculateHeight, 250);
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      clearTimeout(this.updateId);
+	      clearTimeout(this.transitionUpdateId);
 	      window.removeEventListener('resize', this.calculateHeight);
 	    }
 	  }, {
