@@ -112,7 +112,7 @@ export default class TextInput extends React.Component {
   getFontSize() {
     return window.getComputedStyle(this.refs.wrapper).getPropertyValue('font-size');
   }
-  
+
   /**
   * Get css class names for the component for it's different states
   * @return {String}
