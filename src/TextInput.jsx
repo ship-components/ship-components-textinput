@@ -1,6 +1,6 @@
 import React from 'react';
-
 import nodeHeight from './nodeHeight';
+import {Utils} from 'ship-components-utility';
 
 import css from './text-input.css';
 
@@ -22,6 +22,7 @@ export default class TextInput extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleEnterKey = this.handleEnterKey.bind(this);
+    this.getFontSize = this.getFontSize.bind(this);
   }
 
   componentDidMount() {
@@ -101,9 +102,17 @@ export default class TextInput extends React.Component {
       this.props.minRows,
       this.props.maxRows
     );
+    // ONESONY-693, IE11 nodeHeight workaround
+    if (Utils.isIEBrowser() && (!this.props.value || this.props.value.length === 0)) {
+      state.height = parseInt(this.getFontSize(), 10);
+    }
     this.setState(state);
- }
+  }
 
+  getFontSize() {
+    return window.getComputedStyle(this.refs.wrapper).getPropertyValue('font-size');
+  }
+  
   /**
   * Get css class names for the component for it's different states
   * @return {String}
