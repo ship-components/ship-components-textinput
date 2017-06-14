@@ -1,6 +1,6 @@
 {
   "name": "ship-components-textinput",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Material Design Autosizing Text Input",
   "main": "src/TextInput.jsx",
   "scripts": {
@@ -8,7 +8,8 @@
     "build": "npm run test && grunt build",
     "lint": "./node_modules/eslint/bin/eslint.js src/*.jsx",
     "test": "grunt lint && ./node_modules/jest-cli/bin/jest.js --coverage",
-    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v"
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -v",
+    "travis": "npm install -g trevor && trevor"
   },
   "repository": {
     "type": "git",
@@ -38,9 +39,9 @@
     "babel": "^6.0.15",
     "babel-core": "^6.1.4",
     "babel-eslint": "^4.1.5",
-    "babel-jest": "git+https://github.com/isuttell/babel-jest.git#master",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^6.1.0",
-    "babel-preset-latest": "^6.24.0",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.1.4",
     "classnames": "^2.2.0",
     "coveralls": "^2.11.4",
@@ -86,11 +87,17 @@
       "<rootDir>/node_modules/fbjs",
       "<rootDir>/node_modules/react-dom",
       "<rootDir>/node_modules/react-addons-test-utils"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!ship-components-utility).+\\.js$"
     ]
   },
   "babelJest": {
     "include": [
       "src/**/*.@(js|jsx|es6)"
     ]
+  },
+  "dependencies": {
+    "ship-components-utility": "^1.2.1"
   }
 }
