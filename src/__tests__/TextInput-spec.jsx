@@ -1,7 +1,7 @@
 jest.unmock('../TextInput');
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 
 describe('TextInput', () => {
   let TextInput;
@@ -16,18 +16,18 @@ describe('TextInput', () => {
        {} // props go here
     );
 
-    expect(() => TestUtils.renderIntoDocument(element))
+    expect(() => ReactTestUtils.renderIntoDocument(element))
        .not.toThrow();
   });
 
   it('should support custom css classes', () => {
     let className = 'testClass';
-    let reactTree = TestUtils.renderIntoDocument(
+    let reactTree = ReactTestUtils.renderIntoDocument(
       <TextInput
         className={className}
       />
     );
-    let comp = TestUtils.findRenderedDOMComponentWithClass(reactTree, className);
+    let comp = ReactTestUtils.findRenderedDOMComponentWithClass(reactTree, className);
 
     expect(comp).toBeDefined();
   });
