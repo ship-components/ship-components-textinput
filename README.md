@@ -102,6 +102,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 0.3.3 - Workaround for nodeHeight.js not returning appropriate height in IE11
 * 0.3.2 - Updates babel presets to babel-preset-latest
 * 0.3.1 - Added transition update timeout so textinput waits on css transition before height calc
 * 0.3.0 - Upgrades to React 15, adds tests, Travis CI and coverage
