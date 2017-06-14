@@ -4,3 +4,4 @@ coverage/
 npm-debug.log
 *.sublime*
 .vs_code/
+.dockerignore
