@@ -181,7 +181,10 @@ export default class TextInput extends React.Component {
     }
 
     return (
-      <div className={this.classNames()}>
+      <div
+        ref='wrapper'
+        className={this.classNames()}
+      >
         <div className={css.fieldContainer}>
           <textarea
             placeholder={this.props.placeholder}
