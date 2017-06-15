@@ -89,7 +89,7 @@
       "<rootDir>/node_modules/react-addons-test-utils"
     ],
     "transformIgnorePatterns": [
-      "/node_modules/(?!ship-components-utility).+\\.js$"
+      "/node_modules/(?!ship-components-*).+\\.js$"
     ]
   },
   "babelJest": {
