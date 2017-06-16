@@ -102,8 +102,8 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
-# 0.3.5 - workaround for IE11 height calc when typing too fast
-# 0.3.4 - added ref crucial to 0.3.3 somehow missed in merge
+* 0.3.5 - workaround for IE11 height calc when typing too fast
+* 0.3.4 - added ref crucial to 0.3.3 somehow missed in merge
 * 0.3.3 - Workaround for nodeHeight.js not returning appropriate height in IE11
 * 0.3.2 - Updates babel presets to babel-preset-latest
 * 0.3.1 - Added transition update timeout so textinput waits on css transition before height calc
