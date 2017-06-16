@@ -31,12 +31,21 @@ export default class TextInput extends React.Component {
   }
 
   componentWillReceiveProps() {
-    // Render the content and then update the state/height
-    clearTimeout(this.updateId);
-    this.updateId = setTimeout(this.calculateHeight, 0);
+    // ONESONY-712, IE11 defer height measure to DidUpdate
+    if (!Utils.isIEBrowser()) {
+      // Render the content and then update the state/height
+      clearTimeout(this.updateId);
+      this.updateId = setTimeout(this.calculateHeight, 0);
 
-    clearTimeout(this.transitionUpdateId)
-    this.transitionUpdateId = setTimeout(this.calculateHeight, 250);
+      clearTimeout(this.transitionUpdateId)
+      this.transitionUpdateId = setTimeout(this.calculateHeight, 250);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (Utils.isIEBrowser() && prevProps.value !== this.props.value) {
+      this.calculateHeight();
+    }
   }
 
   componentWillUnmount() {
