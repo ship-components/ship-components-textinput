@@ -35,7 +35,7 @@ module.exports = {
       // ES6/JSX for App
       {
         test: /\.(jsx?|es6)$/,
-        exclude: /node_modules\/(?!(ship-components-*)\/).*/,
+        include: /ship-components-.*/,
         loader: 'babel'
       },
       // Ensure 'use strict' is everywhere
