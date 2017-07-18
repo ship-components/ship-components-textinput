@@ -99,6 +99,6 @@
     ]
   },
   "dependencies": {
-    "ship-components-utility": "^1.2.1"
+    "ship-components-utility": "^1.3.2"
   }
 }
