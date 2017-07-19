@@ -116,8 +116,6 @@ export default class TextInput extends React.Component {
     if (shouldUpdate) {
       this.setState(state);
     }
-
-    this.setState(state);
   }
 
   getFontSize() {
