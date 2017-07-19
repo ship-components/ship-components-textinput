@@ -1,6 +1,6 @@
 {
   "name": "ship-components-textinput",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Material Design Autosizing Text Input",
   "main": "src/TextInput.jsx",
   "scripts": {
@@ -42,7 +42,6 @@
     "babel-jest": "^20.0.3",
     "babel-loader": "^6.1.0",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.1.4",
     "classnames": "^2.2.0",
     "coveralls": "^2.11.4",
