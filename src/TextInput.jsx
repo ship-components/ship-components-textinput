@@ -30,22 +30,12 @@ export default class TextInput extends React.Component {
     window.addEventListener('resize', this.calculateHeight);
   }
 
-  componentWillReceiveProps() {
-    // ONESONY-712, IE11 defer height measure to DidUpdate
-    if (!Utils.isIEBrowser()) {
-      // Render the content and then update the state/height
-      clearTimeout(this.updateId);
-      this.updateId = setTimeout(this.calculateHeight, 0);
+  componentDidUpdate() {
+    clearTimeout(this.updateId);
+    this.updateId = setTimeout(this.calculateHeight, 0);
 
-      clearTimeout(this.transitionUpdateId)
-      this.transitionUpdateId = setTimeout(this.calculateHeight, 250);
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (Utils.isIEBrowser() && prevProps.value !== this.props.value) {
-      this.calculateHeight();
-    }
+    clearTimeout(this.transitionUpdateId)
+    this.transitionUpdateId = setTimeout(this.calculateHeight, 250);
   }
 
   componentWillUnmount() {
@@ -115,7 +105,17 @@ export default class TextInput extends React.Component {
     if (Utils.isIEBrowser() && (!this.props.value || this.props.value.length === 0)) {
       state.height = parseInt(this.getFontSize(), 10);
     }
-    this.setState(state);
+
+    let shouldUpdate = false;
+    for (const key in state) {
+      if (state.hasOwnProperty(key) && state[key] !== this.state[key]) {
+        shouldUpdate = true;
+      }
+    }
+
+    if (shouldUpdate) {
+      this.setState(state);
+    }
   }
 
   getFontSize() {
