@@ -46,6 +46,8 @@
     "classnames": "^2.2.0",
     "coveralls": "^2.11.4",
     "css-loader": "^0.22.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
     "eslint": "^1.9.0",
     "eslint-loader": "^1.1.1",
     "eslint-plugin-react": "^3.8.0",
@@ -65,16 +67,19 @@
     "postcss-loader": "^0.7.0",
     "postcss-nested": "^1.0.0",
     "postcss-simple-vars": "^1.1.0",
-    "react": ">=15.0.0",
+    "react": "^15.6.2",
     "react-addons-css-transition-group": ">=15.0.0",
-    "react-addons-test-utils": ">=15.0.0",
-    "react-dom": ">=15.0.0",
+    "react-dom": "^15.6.2",
+    "react-test-renderer": "^15.6.2",
     "strict-loader": "^0.1.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.4",
     "webpack-dev-server": "^1.12.1"
   },
   "jest": {
+    "setupFiles": [
+      "./jest-setup.js"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },

@@ -2,6 +2,7 @@ jest.unmock('../TextInput');
 
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
+import {shallow, mount} from 'enzyme';
 
 describe('TextInput', () => {
   let TextInput;
@@ -10,7 +11,7 @@ describe('TextInput', () => {
   });
 
   // Render without error
-  it('should render without error', () => {
+  it('renders without error', () => {
     let element = React.createElement(
        TextInput, // component class
        {} // props go here
@@ -20,7 +21,7 @@ describe('TextInput', () => {
        .not.toThrow();
   });
 
-  it('should support custom css classes', () => {
+  it('supports custom css classes', () => {
     let className = 'testClass';
     let reactTree = ReactTestUtils.renderIntoDocument(
       <TextInput
@@ -31,4 +32,36 @@ describe('TextInput', () => {
 
     expect(comp).toBeDefined();
   });
+
+  const supportedEvents = ['Change','Focus','Blur','KeyDown'];
+  supportedEvents.forEach(eventType => {
+    it(`calls a ${eventType.toLowerCase()} handler`, () => {
+      const mockHandler = jest.fn();
+      const props = {
+        [`on${eventType}`]: mockHandler
+      }
+      const wrapper = mount(
+        <TextInput {...props}/>
+      );
+
+      expect(mockHandler).not.toHaveBeenCalled();
+      wrapper.find('textarea').simulate(eventType.toLowerCase());
+      expect(mockHandler).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('handles EnterKeyDown', () => {
+    const mockHandler = jest.fn();
+    const mockEvent = {keyCode: 13, key: 'Enter'};
+    const wrapper = mount(
+      <TextInput
+        onEnterKeyDown={mockHandler}
+      />
+    );
+
+    expect(mockHandler).not.toHaveBeenCalled();
+    wrapper.find('textarea').simulate('keydown', mockEvent);
+    expect(mockHandler).toHaveBeenCalledTimes(1);
+  });
+
 });

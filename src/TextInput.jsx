@@ -84,7 +84,7 @@ export default class TextInput extends React.Component {
 
   handleEnterKey(event) {
     if (!(this.props.multiline && event.shiftKey)) {
-      // prevent new line if not Shift + Enter
+      // prevent new line if not Shift + Enter in multiline input
       event.preventDefault();
     }
     if (typeof this.props.onEnterKeyDown === 'function') {
@@ -133,11 +133,11 @@ export default class TextInput extends React.Component {
     let valueIsNotEmpty = value && value.length > 0;
 
     if (this.state.focus || valueIsNotEmpty) {
-     classes.push(css.active);
+      classes.push(css.active);
     }
 
     if (this.state.focus) {
-     classes.push(css.focus);
+      classes.push(css.focus);
     }
 
     if (this.props.label) {
