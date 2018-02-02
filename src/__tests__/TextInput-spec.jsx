@@ -50,4 +50,18 @@ describe('TextInput', () => {
     });
   });
 
+  it('handles EnterKeyDown', () => {
+    const mockHandler = jest.fn();
+    const mockEvent = {keyCode: 13, key: 'Enter'};
+    const wrapper = mount(
+      <TextInput
+        onEnterKeyDown={mockHandler}
+      />
+    );
+
+    expect(mockHandler).not.toHaveBeenCalled();
+    wrapper.find('textarea').simulate('keydown', mockEvent);
+    expect(mockHandler).toHaveBeenCalledTimes(1);
+  });
+
 });
