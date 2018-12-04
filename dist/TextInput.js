@@ -72,7 +72,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _shipComponentsUtility = __webpack_require__(7);
 	
-	var _textInput = __webpack_require__(13);
+	var _textInput = __webpack_require__(14);
 	
 	var _textInput2 = _interopRequireDefault(_textInput);
 	
@@ -116,9 +116,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      window.addEventListener('resize', this.calculateHeight);
 	    }
 	  }, {
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps() {
-	      // Render the content and then update the state/height
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
 	      clearTimeout(this.updateId);
 	      this.updateId = setTimeout(this.calculateHeight, 0);
 	
@@ -178,7 +177,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: 'handleEnterKey',
 	    value: function handleEnterKey(event) {
 	      if (!(this.props.multiline && event.shiftKey)) {
-	        // prevent new line if not Shift + Enter
+	        // prevent new line if not Shift + Enter in multiline input
 	        event.preventDefault();
 	      }
 	      if (typeof this.props.onEnterKeyDown === 'function') {
@@ -198,7 +197,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (_shipComponentsUtility.Utils.isIEBrowser() && (!this.props.value || this.props.value.length === 0)) {
 	        state.height = parseInt(this.getFontSize(), 10);
 	      }
-	      this.setState(state);
+	
+	      var shouldUpdate = false;
+	      for (var key in state) {
+	        if (state.hasOwnProperty(key) && state[key] !== this.state[key]) {
+	          shouldUpdate = true;
+	        }
+	      }
+	
+	      if (shouldUpdate) {
+	        this.setState(state);
+	      }
 	    }
 	  }, {
 	    key: 'getFontSize',
@@ -283,7 +292,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { className: this.classNames() },
+	        {
+	          ref: 'wrapper',
+	          className: this.classNames()
+	        },
 	        _react2.default.createElement(
 	          'div',
 	          { className: _textInput2.default.fieldContainer },
@@ -382,8 +394,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return    {Number}    size
 	 */
 	function objectSize(obj) {
-	  var size = 0,
-	      key = void 0;
+	  var size = 0;
+	  var key = void 0;
+	
 	  for (key in obj) {
 	    if (obj.hasOwnProperty(key)) {
 	      size++;
@@ -722,6 +735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var iterable = exports.iterable = iter.bind(null, false);
 	
 	var not = exports.not = function () {
+	  // eslint-disable-line func-names
 	  var fns = {};
 	  for (var key in keys) {
 	    if (keys.hasOwnProperty(key)) {
@@ -874,7 +888,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	
 	module.exports = KeyEvents;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module)))
 
 /***/ }),
 /* 5 */
@@ -1126,6 +1140,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return val;
 	  } else if (is.obj(val)) {
 	    return function (item) {
+	      // eslint-disable-line func-names
 	      if (is.not.obj(item)) {
 	        return false;
 	      }
@@ -1494,6 +1509,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return    {Number}
 	   */
 	  return function (a, b) {
+	    // eslint-disable-line func-names
 	    // Loop through each prop we want to sort by
 	    var index = -1;
 	    while (++index < props.length) {
@@ -1603,6 +1619,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return str;
 	  }
 	  return str.replace(/\.?([A-Z])/g, function (x, y) {
+	    // eslint-disable-line func-names
 	    return '_' + y.toLowerCase();
 	  }).replace(/^_/, '').toUpperCase();
 	}
@@ -1769,24 +1786,25 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 13 */
 /***/ (function(module, exports) {
 
-	// removed by extract-text-webpack-plugin
-	module.exports = {"container":"text-input--container","focus":"text-input--focus","fieldContainer":"text-input--fieldContainer","error":"text-input--error","success":"text-input--success","field":"text-input--field","label":"text-input--label","active":"text-input--active","hasLabel":"text-input--hasLabel"};
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
+	"use strict";
+	
+	module.exports = function (module) {
+		if (!module.webpackPolyfill) {
+			module.deprecate = function () {};
 			module.paths = [];
 			// module.parent = undefined by default
 			module.children = [];
 			module.webpackPolyfill = 1;
 		}
 		return module;
-	}
+	};
 
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+	module.exports = {"container":"text-input--container","focus":"text-input--focus","fieldContainer":"text-input--fieldContainer","error":"text-input--error","success":"text-input--success","field":"text-input--field","label":"text-input--label","active":"text-input--active","hasLabel":"text-input--hasLabel"};
 
 /***/ }),
 /* 15 */
