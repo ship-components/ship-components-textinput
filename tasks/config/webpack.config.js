@@ -20,8 +20,7 @@ module.exports = {
     'react': 'React',
     'react-dom': true,
     'react-highlight-click': true,
-    'react-outsideclick': true,
-    'react-addons-css-transition-group': true
+    'react-outsideclick': true
   },
 
   module: {

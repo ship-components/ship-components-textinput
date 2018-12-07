@@ -102,6 +102,7 @@ Below are is a sample of how to setup the loaders:
 2. `npm test`
 
 ## History
+* 1.0.0 - Upgrade to React 16
 * 0.3.10 - Update to use postcss-calc 6
 * 0.3.9 - Consolidate WillReceiveProps and DidUpdate to fix bug w/ triggering calculateHeight
 * 0.3.8 - Removes the babel-preset-latest.
