@@ -1,6 +1,6 @@
 {
   "name": "ship-components-textinput",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Material Design Autosizing Text Input",
   "main": "src/TextInput.jsx",
   "scripts": {
@@ -102,6 +102,6 @@
     ]
   },
   "dependencies": {
-    "ship-components-utility": "^1.3.2"
+    "ship-components-utility": "^2.1.1"
   }
 }
